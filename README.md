@@ -1,6 +1,5 @@
 # Location de Véhicule (ESX et OX)
 
-![GitHub](https://img.shields.io/github/license/noxxodev/Location-vehicule)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/noxxodev/Location-vehicule)
 
 Ce script permet de gérer la location de véhicules dans votre serveur FiveM. Il est conçu pour fonctionner avec les frameworks ESX et OX.
@@ -22,10 +21,6 @@ Ce script permet de gérer la location de véhicules dans votre serveur FiveM. I
 
 Les véhicules à louer ainsi que leurs paramètres peuvent être configurés dans le fichier `config.lua`. Les points de location sont automatiquement créés lorsqu'un ped est placé sur la carte.
 
-## Contributeurs
+## Créateurs
 
 - Noxxo Dev
-
-## Licence
-
-Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
