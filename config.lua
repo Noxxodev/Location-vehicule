@@ -1,88 +1,72 @@
 Config = {}
 
-Config.car_pos1 = vector3(-229.06813049316406,-889.094482421875,29.9033203125)
-Config.car_pos2 = vector3(1679.93408203125,4921.595703125,42.06884765625)
-Config.car_pos3 = vector3(135.86373901367188,6651.560546875,31.5714111328125)
-Config.car_pos4 = vector3(-989.6307373046875,-2706.791259765625,13.82861328125)
-Config.car_pos5 = vector3(501.7724609375,5597.1997070313,796.95489501953)
+Config.notif = 2 -- Type de notification 1 = ESX notification | 2 = OX notification
 
-Config.time = 1800 --second--
-
-Config.timetoend = 10 --second--
-
-Config.Blips = { 
-	loca1 = { 
-		Pos     = { x = -231.54725646972656, y = -898.1406860351562, z = 29.886474609375 },
-		Sprite  = 464,
-		Scale   = 0.7,
-		Colour  = 11,
-	},
-	loca2 = { 
-		Pos     = { x = 1678.04833984375, y = 4919.64404296875, z = 42.06884765625 },
-		Sprite  = 464,
-		Scale   = 0.7,
-		Colour  = 11,
-	},
-	loca3 = { 
-		Pos     = { x = 133.2131805419922, y = 6650.03076171875, z = 31.6556396484375 },
-		Sprite  = 464,
-		Scale   = 0.7,
-		Colour  = 11,
-	},
-	loca4 = { 
-		Pos     = { x = -989.98681640625, y = -2703.481201171875, z = 13.82861328125 },
-		Sprite  = 464,
-		Scale   = 0.7,
-		Colour  = 11,
-	},
-	loca5 = { 
-		Pos     = { x = 501.34872436523, y = 5601.9389648438, z = 796.93005371094 },
-		Sprite  = 464,
-		Scale   = 0.7,
-		Colour  = 11,
-	}
+Config.localisation = {
+    {
+        pos = { x = -231.547, y = -898.141, z = 29.886, h = 342.99 }, -- Position du blips ainsi que du ped
+        name = 'csb_car3guy1', -- Nom du ped
+        blocking = true, -- true = ped bloquer | false = ped qui change de place si vous le frapper
+        invincible = true, -- true = ped imortel | false = ped susceptible de mourir
+        freeze = true, -- true = le ped reste statique | false = le ped n'est pas statique
+        icon = 'fa-solid fa-car-side', -- Icône de l'interaction alt : https://fontawesome.com/search
+        titre = 'Location de voiture', -- Nom de l'interaction alt
+        distance = 2.5, -- Distance à laquelle vous pouvez interagir
+        menu = 1, -- Numéro du menu a mettre le même avec nombre plus bas pour relier les 2
+        blip = {
+            sprite = 464, -- Icon du blip : https://docs.fivem.net/docs/game-references/blips/
+            scale = 0.8, -- Taille du blip
+            colour = 11,  -- Couleur du blip : https://docs.fivem.net/docs/game-references/blips/
+            name = "Location de véhicule", -- Nom du blip
+        },
+    },
+    {
+        pos = { x = 151.23, y = -1000.23, z = 29.34, h = 161.57 },
+        name = 'csb_car3guy1',
+        blocking = true,
+        invincible = true,
+        freeze = true,
+        icon = 'fa-solid fa-car-side',
+        titre = 'Location de voiture',
+        distance = 2.5,
+        menu = 2,
+        blip = {
+            sprite = 464,
+            scale = 0.8,
+            colour = 11,
+            name = "Location de véhicule",
+        },
+    },
 }
 
-Config.Loca = { 
-	loca = {
-		pos1 = vector3(-231.54725646972656,-898.1406860351562,29.886474609375),
-		pos2 = vector3(1678.04833984375,4919.64404296875,42.06884765625),
-		pos3 = vector3(133.2131805419922,6650.03076171875,31.6556396484375),
-		pos4 = vector3(-989.98681640625,-2703.481201171875,13.82861328125),
-		pos5 = vector3(501.34872436523,5601.9389648438,795.93005371094),
-	}
+Config.vehicule = {
+    {
+        label = "Sultan", -- Nom du menu
+        vehicule = "sultan", -- nom du véhicule
+        description = "Vous pouvez louer une sultan pour : 20$", -- Descritption du menu
+        prix = 20, -- Prix du véhicule
+        image = "https://cdn.discordapp.com/attachments/1116084412233289758/1243256276289327195/sultan.png?ex=6650d022&is=664f7ea2&hm=6529f698fa8282866cc2bdf89b2f77f36698b84376d822d1918dcaf265237de1&", -- Image du véhicule
+    },
+    {
+        label = "Terminus",
+        vehicule = "terminus",
+        description = "Vous pouvez louer un terminus pour : 300$",
+        prix = 300,
+        image = "https://cdn.discordapp.com/attachments/1116084412233289758/1243256226054410312/terminus.png?ex=6650d016&is=664f7e96&hm=7e35678d7e4a40af40a683372276ba1153288d9c5e49802716c10e3ef7403367&",
+    }
 }
 
-Config.Veh = { 
-	veh1 = { 
-		title     = 'Panto',
-		desc  = '500$',
-		price   = 500,
-		veh  = 'panto',
-	},
-	veh2 = { 
-		title     = 'Fagio',
-		desc  = '300$',
-		price   = 300,
-		veh  = 'faggio',
-	},
-	veh3 = { 
-		title     = 'BMX',
-		desc  = '50$',
-		price   = 50,
-		veh  = 'bmx',
-	},
-	veh4 = { 
-		title     = 'Sanchez',
-		desc  = '300$',
-		price   = 300,
-		veh  = 'sanchez',
-	},
-	--veh5 = { 
-	--	title     = 'BMX',
-	--	desc  = '5$',
-	--	price   = 5,
-	--	veh  = 'F22A',
-	--}
-
+Config.posvehicule = {
+    [1] = {
+        posspawn = { x = -228.15, y = -888.52, z = 29.92, h = 249.44 }, -- Position de spawn du véhicule
+        tempsfinlocation = 0, -- A quelle moment le temps de location s'arrète en seconde
+        tempslocation = 30, -- Temps de location en seconde
+        nombre = 1, -- -- Numéro du menu a mettre le même avec le nombre haut pour relier les 2
+    },
+    [2] = {
+        posspawn = { x = 150.36, y = -1004.36, z = 29.33, h = 70.86 },
+        tempsfinlocation = 0,
+        tempslocation = 30,
+        nombre = 2,
+    },
 }
