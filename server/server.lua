@@ -6,3 +6,12 @@ AddEventHandler('nox_location:prix', function(prix)
 	xPlayer.removeMoney(prix)
 end)
 
+AddEventHandler('onResourceStart', function(resourceName)
+	if (GetCurrentResourceName() ~= resourceName) then
+		return
+	end
+	print("-----------------------------------------------------------------------------------")
+	print("                                     Wind Studio                                   ")
+	print("                                 Location de voiture                               ")
+	print("-----------------------------------------------------------------------------------")
+end)
