@@ -1,564 +1,126 @@
 ESX = exports["es_extended"]:getSharedObject()
 
---Spawn le véhicule / Spawn the vehicle--
+local nombremenu
 
-function spawnCar(car)
-    local car = GetHashKey(car)
-    local timetoend = Config.timetoend / 60
-
-    RequestModel(car)
-    while not HasModelLoaded(car) do
-        RequestModel(car)
-        Citizen.Wait(0)
-    end
-    local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), false))
-    local vehicle = CreateVehicle(car, Config.car_pos1, 241.51, true, false)
-    SetEntityAsMissionEntity(vehicle, true, true)
-    SetVehicleNumberPlateText(vehicle, "LOCATION") 
-    SetPedIntoVehicle(GetPlayerPed(-1),vehicle,-1)
-        local time = Config.time -- 1 heure
-        while (time ~= 0) do
-        Wait( 1000 ) -- Wait a second
-        time = time - 1
-        -- 1 Second should have past by now
-        if time == Config.timetoend then
-            DeleteVehicle(vehicle)
-            ESX.ShowNotification("Location", 'Le temps de location est fini.', "info", 8000, "top-left")
-            --ESX.ShowNotification('Le temps de location est fini.', "info", 8000)
-        end
-        end
-    
-end
-
-function spawnCar2(car)
-    local car = GetHashKey(car)
-    local timetoend = Config.timetoend / 60
-
-    RequestModel(car)
-    while not HasModelLoaded(car) do
-        RequestModel(car)
-        Citizen.Wait(0)
-    end
-    local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), false))
-    local vehicle = CreateVehicle(car, Config.car_pos2, 241.51, true, false)
-    SetEntityAsMissionEntity(vehicle, true, true)
-    SetVehicleNumberPlateText(vehicle, "LOCATION") 
-    SetPedIntoVehicle(GetPlayerPed(-1),vehicle,-1)
-        local time = Config.time -- 1 heure
-        while (time ~= 0) do
-        Wait( 1000 ) -- Wait a second
-        time = time - 1
-        -- 1 Second should have past by now
-        if time == Config.timetoend then
-            DeleteVehicle(vehicle)
-            ESX.ShowNotification("Location", 'Le temps de location est fini.', "info", 8000, "top-left")
-            --ESX.ShowNotification('Le temps de location est fini.', "info", 8000)
-        end
-        end
-    
-end
-
-function spawnCar3(car)
-    local car = GetHashKey(car)
-    local timetoend = Config.timetoend / 60
-
-    RequestModel(car)
-    while not HasModelLoaded(car) do
-        RequestModel(car)
-        Citizen.Wait(0)
-    end
-    local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), false))
-    local vehicle = CreateVehicle(car, Config.car_pos3, 241.51, true, false)
-    SetEntityAsMissionEntity(vehicle, true, true)
-    SetVehicleNumberPlateText(vehicle, "LOCATION") 
-    SetPedIntoVehicle(GetPlayerPed(-1),vehicle,-1)
-        local time = Config.time -- 1 heure
-        while (time ~= 0) do
-        Wait( 1000 ) -- Wait a second
-        time = time - 1
-        -- 1 Second should have past by now
-        if time == Config.timetoend then
-            DeleteVehicle(vehicle)
-            ESX.ShowNotification("Location", 'Le temps de location est fini.', "info", 8000, "top-left")
-            --ESX.ShowNotification('Le temps de location est fini.', "info", 8000)
-        end
-        end
-    
-end
-
-function spawnCar4(car)
-    local car = GetHashKey(car)
-    local timetoend = Config.timetoend / 60
-
-    RequestModel(car)
-    while not HasModelLoaded(car) do
-        RequestModel(car)
-        Citizen.Wait(0)
-    end
-    local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), false))
-    local vehicle = CreateVehicle(car, Config.car_pos4, 241.51, true, false)
-    SetEntityAsMissionEntity(vehicle, true, true)
-    SetVehicleNumberPlateText(vehicle, "LOCATION") 
-    SetPedIntoVehicle(GetPlayerPed(-1),vehicle,-1)
-        local time = Config.time -- 1 heure
-        while (time ~= 0) do
-        Wait( 1000 ) -- Wait a second
-        time = time - 1
-        -- 1 Second should have past by now
-        if time == Config.timetoend then
-            DeleteVehicle(vehicle)
-            ESX.ShowNotification("Location", 'Le temps de location est fini.', "info", 8000, "top-left")
-            --ESX.ShowNotification('Le temps de location est fini.', "info", 8000)
-        end
-        end
-    
-end
-
-function spawnCar5(car)
-    local car = GetHashKey(car)
-    local timetoend = Config.timetoend / 60
-
-    RequestModel(car)
-    while not HasModelLoaded(car) do
-        RequestModel(car)
-        Citizen.Wait(0)
-    end
-    local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), false))
-    local vehicle = CreateVehicle(car, Config.car_pos5, 241.51, true, false)
-    SetEntityAsMissionEntity(vehicle, true, true)
-    SetVehicleNumberPlateText(vehicle, "LOCATION") 
-    SetPedIntoVehicle(GetPlayerPed(-1),vehicle,-1)
-        local time = Config.time -- 1 heure
-        while (time ~= 0) do
-        Wait( 1000 ) -- Wait a second
-        time = time - 1
-        -- 1 Second should have past by now
-        if time == Config.timetoend then
-            DeleteVehicle(vehicle)
-            ESX.ShowNotification("Location", 'Le temps de location est fini.', "info", 8000, "top-left")
-            --ESX.ShowNotification('Le temps de location est fini.')
-        end
-        end
-    
-end
-
---Blips--
 Citizen.CreateThread(function()
-    local blipMarker = Config.Blips.loca1
-    local blip = AddBlipForCoord(blipMarker.Pos.x, blipMarker.Pos.y, blipMarker.Pos.z)
-    SetBlipSprite(blip, blipMarker.Sprite)
-    SetBlipScale(blip, blipMarker.Scale)
-    SetBlipColour(blip, blipMarker.Colour)
-    SetBlipAsShortRange(blip, true)
+    for k, v in pairs(Config.localisation) do
+        local hash = GetHashKey(v.name)
+        while not HasModelLoaded(hash) do
+            RequestModel(hash)
+            Wait(1000)
+        end
+        local ped = CreatePed(4, hash, v.pos.x, v.pos.y, v.pos.z - 1.0, v.pos.h, false, true)
+        SetBlockingOfNonTemporaryEvents(ped, v.blocking)
+        SetEntityInvincible(ped, v.invincible)
+        FreezeEntityPosition(ped, v.freeze)
 
-    BeginTextCommandSetBlipName('STRING')
-    AddTextComponentString("Location de véhicule")
-    EndTextCommandSetBlipName(blip)
+        exports.qtarget:AddBoxZone("location_"..k, vector3(v.pos.x, v.pos.y, v.pos.z - 0.9), 1.0, 1.5, {
+            name = "location_"..k,
+            heading = 35,
+            debugPoly = false,
+            minZ = v.pos.z - 1.0,
+            maxZ = v.pos.z + 1.0,
+        }, {
+            options = {
+                {
+                    icon = v.icon,
+                    label = v.titre,
+                    action = function()
+                        nombremenu = v.menu
+                        lib.showContext('location')
+                    end
+                },
+            },
+            distance = v.distance
+        })
+
+        local blip = AddBlipForCoord(v.pos.x, v.pos.y, v.pos.z)
+        SetBlipSprite(blip, v.blip.sprite)
+        SetBlipScale(blip, v.blip.scale)
+        SetBlipColour(blip, v.blip.colour)
+        SetBlipAsShortRange(blip, true)
+
+        BeginTextCommandSetBlipName('STRING')
+        AddTextComponentString(v.blip.name)
+        EndTextCommandSetBlipName(blip)
+    end
 end)
 
 Citizen.CreateThread(function()
-    local blipMarker = Config.Blips.loca2
-    local blip = AddBlipForCoord(blipMarker.Pos.x, blipMarker.Pos.y, blipMarker.Pos.z)
-    SetBlipSprite(blip, blipMarker.Sprite)
-    SetBlipScale(blip, blipMarker.Scale)
-    SetBlipColour(blip, blipMarker.Colour)
-    SetBlipAsShortRange(blip, true)
+    local options = {}
+    for k, v in pairs(Config.vehicule) do
+        table.insert(options, {
+            title = v.label,
+            description = v.description,
+            image = v.image,
+            onSelect = function()
+                local car = v.vehicule
+                local prix = v.prix
+                TriggerEvent('nox_location:spawncar', car, prix, nombremenu)
+            end
+        })
+    end
 
-    BeginTextCommandSetBlipName('STRING')
-    AddTextComponentString("Location de véhicule")
-    EndTextCommandSetBlipName(blip)
+    lib.registerContext({
+        id = 'location',
+        title = 'Location de voiture',
+        options = options
+    })
 end)
 
-Citizen.CreateThread(function()
-    local blipMarker = Config.Blips.loca3
-    local blip = AddBlipForCoord(blipMarker.Pos.x, blipMarker.Pos.y, blipMarker.Pos.z)
-    SetBlipSprite(blip, blipMarker.Sprite)
-    SetBlipScale(blip, blipMarker.Scale)
-    SetBlipColour(blip, blipMarker.Colour)
-    SetBlipAsShortRange(blip, true)
+RegisterNetEvent('nox_location:spawncar')
+AddEventHandler('nox_location:spawncar', function(car, prix, menuId)
+    local argent = exports.ox_inventory:Search('count', 'money')
+    if argent >= prix then
+        for k, v in pairs(Config.posvehicule) do
+            if v.nombre == menuId then
+                local carHash = GetHashKey(car)
+                RequestModel(carHash)
+                while not HasModelLoaded(carHash) do
+                    RequestModel(carHash)
+                    Citizen.Wait(0)
+                end
+                local vehicle = CreateVehicle(carHash, v.posspawn.x, v.posspawn.y, v.posspawn.z, v.posspawn.h, true, false)
+                TriggerServerEvent('nox_location:prix', prix)
+                SetEntityAsMissionEntity(vehicle, true, true)
+                SetVehicleNumberPlateText(vehicle, "LOCATION")
+                SetPedIntoVehicle(GetPlayerPed(-1), vehicle, -1)
 
-    BeginTextCommandSetBlipName('STRING')
-    AddTextComponentString("Location de véhicule")
-    EndTextCommandSetBlipName(blip)
+                local time = v.tempslocation
+                while time > 0 do
+                    Wait(1000)
+                    time = time - 1
+                    if time == v.tempsfinlocation then
+                        DeleteVehicle(vehicle)
+                        if Config.notif == 1 then
+                            ESX.ShowNotification('Le temps de location est fini.')
+                        end
+                        if Config.notif == 2 then
+                            lib.notify({
+                                title = 'Location',
+                                description = "Le temps de location est fini.",
+                                type = 'inform',
+                                duration = 10000,
+                            })
+                        end
+                        
+                    end
+                end
+                break
+            end
+        end
+    else
+        if Config.notif == 1 then
+            ESX.ShowNotification("Vous n'avez pas assez d'argent.")
+        end
+        if Config.notif == 2 then
+            lib.notify({
+                title = 'Location',
+                description = "Vous n'avez pas assez d'argent.",
+                type = 'inform',
+                duration = 10000,
+            })
+        end
+        
+    end
 end)
-
-Citizen.CreateThread(function()
-    local blipMarker = Config.Blips.loca4
-    local blip = AddBlipForCoord(blipMarker.Pos.x, blipMarker.Pos.y, blipMarker.Pos.z)
-    SetBlipSprite(blip, blipMarker.Sprite)
-    SetBlipScale(blip, blipMarker.Scale)
-    SetBlipColour(blip, blipMarker.Colour)
-    SetBlipAsShortRange(blip, true)
-
-    BeginTextCommandSetBlipName('STRING')
-    AddTextComponentString("Location de véhicule")
-    EndTextCommandSetBlipName(blip)
-end)
-
-Citizen.CreateThread(function()
-    local blipMarker = Config.Blips.loca5
-    local blip = AddBlipForCoord(blipMarker.Pos.x, blipMarker.Pos.y, blipMarker.Pos.z)
-    SetBlipSprite(blip, blipMarker.Sprite)
-    SetBlipScale(blip, blipMarker.Scale)
-    SetBlipColour(blip, blipMarker.Colour)
-    SetBlipAsShortRange(blip, true)
-
-    BeginTextCommandSetBlipName('STRING')
-    AddTextComponentString("Location de véhicule")
-    EndTextCommandSetBlipName(blip)
-end)
-
-
-
-
-local Options = {}
-
-
-exports.qtarget:AddBoxZone("locmenu", Config.Loca.loca.pos1, 2.4, 1, {
-    name="locmenu",
-    heading=187.53,
-    minZ=51.5,
-    maxZ=54.5
-      }, {
-          options = {
-              {
-                  
-                  icon = "fa-sharp fa-solid fa-car",
-                  label = "Location",
-                  action = function()
-                    lib.showContext('locmenu')
-                  end,
-              },
-          },
-          distance = 3.5
-})
-
-exports.qtarget:AddBoxZone("locmenu2", Config.Loca.loca.pos2, 2.4, 1, {
-    name="locmenu2",
-    heading=187.53,
-    minZ=51.5,
-    maxZ=54.5
-      }, {
-          options = {
-              {
-                  
-                  icon = "fa-sharp fa-solid fa-car",
-                  label = "Location",
-                  action = function()
-                    lib.showContext('locmenu2')
-                  end,
-              },
-          },
-          distance = 3.5
-})
-
-exports.qtarget:AddBoxZone("locmenu", Config.Loca.loca.pos3, 2.4, 1, {
-    name="locmenu",
-    heading=187.53,
-    minZ=51.5,
-    maxZ=54.5
-      }, {
-          options = {
-              {
-                  
-                  icon = "fa-sharp fa-solid fa-car",
-                  label = "Location",
-                  action = function()
-                    lib.showContext('locmenu3')
-                  end,
-              },
-          },
-          distance = 3.5
-})
-
-exports.qtarget:AddBoxZone("locmenu", Config.Loca.loca.pos4, 2.4, 1, {
-    name="locmenu",
-    heading=187.53,
-    minZ=51.5,
-    maxZ=54.5
-      }, {
-          options = {
-              {
-                  
-                  icon = "fa-sharp fa-solid fa-car",
-                  label = "Location",
-                  action = function()
-                    lib.showContext('locmenu4')
-                  end,
-              },
-          },
-          distance = 3.5
-})
-
-exports.qtarget:AddBoxZone("locmenu", Config.Loca.loca.pos5, 2.4, 1, {
-    name="locmenu",
-    heading=187.53,
-    minZ=51.5,
-    maxZ=54.5
-      }, {
-          options = {
-              {
-                  
-                  icon = "fa-sharp fa-solid fa-car",
-                  label = "Location",
-                  action = function()
-                    lib.showContext('locmenu5')
-                  end,
-              },
-          },
-          distance = 3.5
-})
-  
-
-lib.registerContext({
-    id = 'locmenu',
-    title = "Menu location",
-    options = {
-        {
-            title = Config.Veh.veh1.title,
-            description = Config.Veh.veh1.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh1.price)
-                    spawnCar(Config.Veh.veh1.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh2.title,
-            description = Config.Veh.veh2.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh2.price)
-                spawnCar(Config.Veh.veh2.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh3.title,
-            description = Config.Veh.veh3.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh3.price)
-                spawnCar(Config.Veh.veh3.veh)
-            end            
-        },
-        --[[{
-            title = Config.Veh.veh4.title,
-            description = Config.Veh.veh4.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh4.price)
-                spawnCar4(Config.Veh.veh4.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh5.title,
-            description = Config.Veh.veh5.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh5.price)
-                spawnCar4(Config.Veh.veh5.veh)
-            end            
-        },
-
-        --[[{
-            title = 'Panto',
-            description = '300$',
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', 300)
-                spawnCar("panto")
-            end            
-        },
-        {
-            title = 'BMX',
-            description = '100$',
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', 100)
-                spawnCar("bmx")
-            end            
-        },]]
-    },
-})
-
-lib.registerContext({
-    id = 'locmenu2',
-    title = "Menu location",
-    options = {
-        {
-            title = Config.Veh.veh1.title,
-            description = Config.Veh.veh1.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh1.price)
-                    spawnCar2(Config.Veh.veh1.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh2.title,
-            description = Config.Veh.veh2.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh2.price)
-                spawnCar2(Config.Veh.veh2.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh3.title,
-            description = Config.Veh.veh3.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh3.price)
-                spawnCar2(Config.Veh.veh3.veh)
-            end            
-        },
-        --[[{
-            title = Config.Veh.veh4.title,
-            description = Config.Veh.veh4.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh4.price)
-                spawnCar4(Config.Veh.veh4.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh5.title,
-            description = Config.Veh.veh5.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh5.price)
-                spawnCar4(Config.Veh.veh5.veh)
-            end            
-        },]]
-    },
-})
-
-lib.registerContext({
-    id = 'locmenu3',
-    title = "Menu location",
-    options = {
-        {
-            title = Config.Veh.veh1.title,
-            description = Config.Veh.veh1.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh1.price)
-                    spawnCar3(Config.Veh.veh1.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh2.title,
-            description = Config.Veh.veh2.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh2.price)
-                spawnCar3(Config.Veh.veh2.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh3.title,
-            description = Config.Veh.veh3.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh3.price)
-                spawnCar3(Config.Veh.veh3.veh)
-            end            
-        },
-        --[[{
-            title = Config.Veh.veh4.title,
-            description = Config.Veh.veh4.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh4.price)
-                spawnCar4(Config.Veh.veh4.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh5.title,
-            description = Config.Veh.veh5.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh5.price)
-                spawnCar4(Config.Veh.veh5.veh)
-            end            
-        },]]
-    },
-})
-
-lib.registerContext({
-    id = 'locmenu4',
-    title = "Menu location",
-    options = {
-        {
-            title = Config.Veh.veh1.title,
-            description = Config.Veh.veh1.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh1.price)
-                    spawnCar4(Config.Veh.veh1.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh2.title,
-            description = Config.Veh.veh2.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh2.price)
-                spawnCar4(Config.Veh.veh2.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh3.title,
-            description = Config.Veh.veh3.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh3.price)
-                spawnCar4(Config.Veh.veh3.veh)
-            end            
-        },
-        --[[{
-            title = Config.Veh.veh4.title,
-            description = Config.Veh.veh4.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh4.price)
-                spawnCar4(Config.Veh.veh4.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh5.title,
-            description = Config.Veh.veh5.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh5.price)
-                spawnCar4(Config.Veh.veh5.veh)
-            end            
-        },]]
-    },
-})
-
-lib.registerContext({
-    id = 'locmenu5',
-    title = "Menu location",
-    options = {
-        --[[{
-            title = Config.Veh.veh1.title,
-            description = Config.Veh.veh1.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh1.price)
-                    spawnCar5(Config.Veh.veh1.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh2.title,
-            description = Config.Veh.veh2.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh2.price)
-                spawnCar5(Config.Veh.veh2.veh)
-            end            
-        },]]
-        {
-            title = Config.Veh.veh3.title,
-            description = Config.Veh.veh3.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh3.price)
-                spawnCar5(Config.Veh.veh3.veh)
-            end            
-        },
-        {
-            title = Config.Veh.veh4.title,
-            description = Config.Veh.veh4.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh4.price)
-                spawnCar5(Config.Veh.veh4.veh)
-            end            
-        },
-        --[[{
-            title = Config.Veh.veh5.title,
-            description = Config.Veh.veh5.desc,
-            onSelect = function()
-                TriggerServerEvent('nox_loca:vehicule', Config.Veh.veh5.price)
-                spawnCar5(Config.Veh.veh5.veh)
-            end            
-        },]]
-    },
-})
-
